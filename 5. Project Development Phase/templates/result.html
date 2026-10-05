@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -16,18 +15,19 @@
         rel="stylesheet"
         href="/static/style.css"
     >
-
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>LegalEase</h1>
+    <header>
+        <h1>LegalEase</h1>
 
-    <h2>
-        Generated {{ document_type }}
-    </h2>
+        <p class="subtitle">
+            AI-Powered Legal Document Generator
+        </p>
+    </header>
 
 
     {% if error %}
@@ -45,63 +45,75 @@
         <div class="notice">
 
             This is an AI-generated legal document draft.
-            Review and edit it before use.
+            Please review it before use.
 
         </div>
 
 
-        <h3>Editable Document</h3>
-
-        <form>
-
-            <textarea
-                id="documentText"
-                rows="30"
-            >{{ document }}</textarea>
-
-        </form>
+        <h2>
+            Generated {{ data.document_type }}
+        </h2>
 
 
-        <h3>Important Terms</h3>
+        <h3>Document Details</h3>
 
         <table>
 
             <tr>
-                <th>Item</th>
+                <th>Document Type</th>
+                <td>{{ data.document_type }}</td>
+            </tr>
+
+            <tr>
+                <th>Party A</th>
+                <td>{{ data.party_a }}</td>
+            </tr>
+
+            <tr>
+                <th>Party B</th>
+                <td>{{ data.party_b }}</td>
+            </tr>
+
+            <tr>
+                <th>Effective Date</th>
+                <td>{{ data.effective_date }}</td>
+            </tr>
+
+            <tr>
+                <th>Term</th>
+                <td>{{ data.term }}</td>
+            </tr>
+
+            <tr>
+                <th>Jurisdiction</th>
+                <td>{{ data.jurisdiction }}</td>
+            </tr>
+
+            <tr>
                 <th>Purpose</th>
+                <td>{{ data.purpose }}</td>
             </tr>
 
             <tr>
-                <td>Parties</td>
-                <td>Identifies the persons or organizations involved.</td>
+                <th>Consideration / Payment</th>
+                <td>{{ data.consideration }}</td>
             </tr>
 
             <tr>
-                <td>Effective Date</td>
-                <td>Specifies when the agreement begins.</td>
-            </tr>
-
-            <tr>
-                <td>Duration</td>
-                <td>Specifies the agreement period.</td>
-            </tr>
-
-            <tr>
-                <td>Responsibilities</td>
-                <td>Defines duties and obligations.</td>
-            </tr>
-
-            <tr>
-                <td>Payment</td>
-                <td>Describes applicable financial terms.</td>
-            </tr>
-
-            <tr>
-                <td>Termination</td>
-                <td>Describes how the agreement may end.</td>
+                <th>Special Terms</th>
+                <td>{{ data.special_terms or "Not specified" }}</td>
             </tr>
 
         </table>
+
+
+        <h3>Generated Legal Document</h3>
+
+        <textarea
+            id="documentText"
+            rows="30"
+            readonly
+        >{{ draft }}</textarea>
 
 
         <h3>Export Document</h3>
@@ -109,47 +121,251 @@
         <div class="export-buttons">
 
             <form
-                action="/export/pdf"
+                action="/api/export/pdf"
                 method="post"
             >
+
+                <input
+                    type="hidden"
+                    name="document_type"
+                    value="{{ data.document_type }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="party_a"
+                    value="{{ data.party_a }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="party_b"
+                    value="{{ data.party_b }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="effective_date"
+                    value="{{ data.effective_date }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="term"
+                    value="{{ data.term }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="jurisdiction"
+                    value="{{ data.jurisdiction }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="purpose"
+                    value="{{ data.purpose }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="consideration"
+                    value="{{ data.consideration }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="special_terms"
+                    value="{{ data.special_terms }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="logo_text"
+                    value="{{ data.logo_text }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="font"
+                    value="{{ data.font }}"
+                >
+
                 <textarea
-                    name="document"
+                    name="draft"
                     hidden
-                >{{ document }}</textarea>
+                >{{ draft }}</textarea>
 
                 <button type="submit">
                     Download PDF
                 </button>
+
             </form>
 
 
             <form
-                action="/export/docx"
+                action="/api/export/docx"
                 method="post"
             >
+
+                <input
+                    type="hidden"
+                    name="document_type"
+                    value="{{ data.document_type }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="party_a"
+                    value="{{ data.party_a }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="party_b"
+                    value="{{ data.party_b }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="effective_date"
+                    value="{{ data.effective_date }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="term"
+                    value="{{ data.term }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="jurisdiction"
+                    value="{{ data.jurisdiction }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="purpose"
+                    value="{{ data.purpose }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="consideration"
+                    value="{{ data.consideration }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="special_terms"
+                    value="{{ data.special_terms }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="logo_text"
+                    value="{{ data.logo_text }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="font"
+                    value="{{ data.font }}"
+                >
+
                 <textarea
-                    name="document"
+                    name="draft"
                     hidden
-                >{{ document }}</textarea>
+                >{{ draft }}</textarea>
 
                 <button type="submit">
                     Download DOCX
                 </button>
+
             </form>
 
 
             <form
-                action="/export/txt"
+                action="/api/export/txt"
                 method="post"
             >
+
+                <input
+                    type="hidden"
+                    name="document_type"
+                    value="{{ data.document_type }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="party_a"
+                    value="{{ data.party_a }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="party_b"
+                    value="{{ data.party_b }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="effective_date"
+                    value="{{ data.effective_date }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="term"
+                    value="{{ data.term }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="jurisdiction"
+                    value="{{ data.jurisdiction }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="purpose"
+                    value="{{ data.purpose }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="consideration"
+                    value="{{ data.consideration }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="special_terms"
+                    value="{{ data.special_terms }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="logo_text"
+                    value="{{ data.logo_text }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="font"
+                    value="{{ data.font }}"
+                >
+
                 <textarea
-                    name="document"
+                    name="draft"
                     hidden
-                >{{ document }}</textarea>
+                >{{ draft }}</textarea>
 
                 <button type="submit">
                     Download TXT
                 </button>
+
             </form>
 
         </div>
