@@ -2,52 +2,105 @@
 
 ## Project Overview
 
-LegalEase is an AI-powered application designed to help users generate draft legal documents based on the information they provide.
+LegalEase is an AI-powered legal document generation system designed to help users create customizable legal document drafts using Google Gemini AI.
 
-The system allows users to enter document details, generate a draft document, review and edit the generated content, and download the final draft.
+The application provides structured templates for documents such as:
+
+- Employment Agreements
+- Lease Agreements
+- Non-Disclosure Agreements (NDA)
+- Service Agreements
+- General Legal Agreements
+
+Users enter relevant information such as party names, dates, addresses, responsibilities, payment terms and other document-specific details.
+
+LegalEase uses Gemini AI to generate a structured legal document draft based on the supplied information.
+
+The generated document can be reviewed, edited and exported as:
+
+- PDF
+- DOCX
+- TXT
+
+> Important: LegalEase generates general-purpose legal document drafts for educational and productivity purposes. It is not a substitute for advice from a qualified legal professional.
+
+---
 
 ## Problem Statement
 
-Creating legal documents manually can be time-consuming and difficult for users who are not familiar with legal document formats.
+Creating legal documents manually can be time-consuming and difficult for users who are unfamiliar with legal document structures.
 
-LegalEase aims to simplify the process by providing an easy-to-use application for generating draft legal documents.
+LegalEase aims to simplify the document drafting process by providing:
 
-## Proposed Solution
+1. Customizable document templates
+2. AI-assisted document generation
+3. Editable previews
+4. Structured terms and sections
+5. Multiple export formats
+6. Simple web-based access
 
-LegalEase uses an AI-powered backend to generate draft legal documents from user-provided information.
+---
 
-The generated document can be reviewed, edited and downloaded by the user.
+## Objectives
 
-## Main Features
+- Generate structured legal document drafts using Gemini AI.
+- Provide multiple legal document templates.
+- Collect required information through a simple web interface.
+- Provide editable document previews.
+- Display important terms in a structured table.
+- Support PDF, DOCX and TXT export.
+- Protect sensitive API credentials.
+- Provide clear legal safety warnings.
+- Support local deployment using FastAPI.
 
-- Generate draft legal documents
-- User-friendly interface
-- AI-powered document generation
-- Preview generated documents
-- Edit generated content
-- Download documents
-- Backend API using FastAPI
+---
 
-## Technologies Used
+## Technology Stack
 
 - Python
 - FastAPI
-- Streamlit
-- Gemini
+- Google Gemini AI
+- Jinja2
+- HTML
+- CSS
+- SQLite-compatible local architecture
+- python-docx
+- ReportLab
 - NumPy
 - Matplotlib
 
-## Project Phases
+---
 
-1. Brainstorming & Ideation Phase
-2. Requirement Analysis Phase
+## System Workflow
+
+User
+↓
+Select Document Type
+↓
+Enter Required Details
+↓
+Validate Input
+↓
+Generate Legal Draft using Gemini AI
+↓
+Display Editable Preview
+↓
+Display Important Terms
+↓
+Edit if Required
+↓
+Export as PDF / DOCX / TXT
+
+---
+
+## Project Structure
+
+```text
+1. Brainstorming & Ideation
+2. Requirement Analysis
 3. Project Design Phase
 4. Project Planning Phase
 5. Project Development Phase
-6. Project Testing Phase
-7. Project Documentation Phase
-8. Project Demonstration Phase
-
-## Legal Disclaimer
-
-LegalEase is intended for generating draft documents and educational/project purposes. Generated content should be reviewed by a qualified legal professional before being used for legal purposes.
+6. Project Testing
+7. Project Documentation
+8. Project Demonstration
