@@ -2,97 +2,117 @@ import os
 from google import genai
 
 
-GEMINI_MODELS = [
+DEFAULT_MODEL = "gemini-3.8-flash"
+
+FALLBACK_MODELS = [
     "gemini-3.8-flash",
     "gemini-3.7-flash",
     "gemini-3.6-flash",
     "gemini-3.5-flash",
-    "gemini-3.5-flash-lite",
-    "gemini-3.1-flash-lite",
 ]
 
 
-def get_client():
+def generate_legal_document(data):
     api_key = os.getenv("GEMINI_API_KEY")
 
     if not api_key:
         raise RuntimeError(
-            "GEMINI_API_KEY is not configured. "
-            "Please add your Gemini API key as an environment variable."
+            "Gemini API key is not configured. "
+            "Please add GEMINI_API_KEY as an environment variable or secret."
         )
 
-    return genai.Client(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 
-
-def generate_document(prompt):
-    client = get_client()
-    errors = []
-
-    for model_name in GEMINI_MODELS:
-        try:
-            print(f"Trying Gemini model: {model_name}")
-
-            response = client.models.generate_content(
-                model=model_name,
-                contents=prompt
-            )
-
-            if response.text:
-                print(f"Success with model: {model_name}")
-                return response.text
-
-        except Exception as error:
-            print(f"Model {model_name} failed: {error}")
-            errors.append(f"{model_name}: {error}")
-
-    raise RuntimeError(
-        "Gemini could not generate the document.\n\n"
-        + "\n".join(errors)
-    )
-
-
-def build_legal_document(document_type, details):
     prompt = f"""
-You are LegalEase, an AI-assisted legal document drafting system.
+You are an AI assistant helping create a legal document draft.
 
-Create a professional GENERAL-PURPOSE LEGAL DOCUMENT DRAFT.
+IMPORTANT:
+- Generate a professional legal document draft.
+- Do not claim that the document is legally guaranteed or legally valid.
+- Do not invent specific laws, statutes, court cases, or legal citations.
+- Clearly structure the document with headings and clauses.
+- Use the information supplied by the user.
+- If important legal information is missing, use a reasonable placeholder or state that professional legal review is required.
+- The output is a draft and not legal advice.
 
-Document Type:
-{document_type}
+DOCUMENT TYPE:
+{data.document_type}
 
-User-provided information:
-{details}
+PARTY A:
+{data.party_a}
 
-Requirements:
+PARTY B:
+{data.party_b}
 
-1. Create a clear professional document.
-2. Use appropriate headings.
-3. Include the parties involved.
-4. Include effective date where provided.
-5. Include duration where relevant.
-6. Include responsibilities and obligations.
-7. Include payment terms where relevant.
-8. Include confidentiality provisions where relevant.
-9. Include termination provisions where relevant.
-10. Include dispute-related wording where appropriate.
-11. Include signature sections.
-12. Do not invent personal information.
-13. Do not claim that the document is legally valid in every jurisdiction.
-14. Do not provide illegal or harmful instructions.
-15. Clearly label the output as a legal document draft.
-16. Use simple but professional legal language.
+EFFECTIVE DATE:
+{data.effective_date}
 
-At the beginning include:
+TERM:
+{data.term}
 
-LEGAL DOCUMENT DRAFT
-Prepared by LegalEase
+JURISDICTION:
+{data.jurisdiction}
 
-At the end include:
+PURPOSE / ROLE / PROPERTY:
+{data.purpose}
 
-DISCLAIMER:
-This document is an AI-generated general-purpose draft and should be reviewed by a qualified legal professional before use.
+PAYMENT / CONSIDERATION:
+{data.consideration}
 
-Return only the document.
+SPECIAL TERMS:
+{data.special_terms}
+
+Create a complete, well-structured legal document draft.
+
+Include:
+1. Document title
+2. Introduction / parties
+3. Purpose
+4. Definitions where appropriate
+5. Main terms and obligations
+6. Payment or consideration where applicable
+7. Confidentiality where applicable
+8. Term and termination
+9. Dispute resolution where appropriate
+10. Governing law
+11. General provisions
+12. Signature section
+
+End with:
+
+LEGAL REVIEW NOTICE:
+This document is an AI-generated draft and should be reviewed by a qualified legal professional before actual use.
 """
 
-    return generate_document(prompt)
+    errors = []
+
+    models_to_try = []
+
+    preferred_model = os.getenv("GEMINI_MODEL", DEFAULT_MODEL)
+    models_to_try.append(preferred_model)
+
+    for model in FALLBACK_MODELS:
+        if model not in models_to_try:
+            models_to_try.append(model)
+
+    for model_name in models_to_try:
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+            )
+
+            text = getattr(response, "text", None)
+
+            if text and text.strip():
+                return text.strip()
+
+            errors.append(f"{model_name}: Empty response")
+
+        except Exception as exc:
+            errors.append(f"{model_name}: {str(exc)}")
+
+    raise RuntimeError(
+        "Gemini document generation failed. "
+        + " | ".join(errors)
+    )
