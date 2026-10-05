@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LegalEase Result</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>LegalEase</h1>
+
+    <h2>
+        Generated {{ document_type }}
+    </h2>
+
+
+    {% if error %}
+
+        <div class="error">
+
+            <h3>Generation Error</h3>
+
+            <p>{{ error }}</p>
+
+        </div>
+
+    {% else %}
+
+        <div class="notice">
+
+            This is an AI-generated legal document draft.
+            Review and edit it before use.
+
+        </div>
+
+
+        <h3>Editable Document</h3>
+
+        <form>
+
+            <textarea
+                id="documentText"
+                rows="30"
+            >{{ document }}</textarea>
+
+        </form>
+
+
+        <h3>Important Terms</h3>
+
+        <table>
+
+            <tr>
+                <th>Item</th>
+                <th>Purpose</th>
+            </tr>
+
+            <tr>
+                <td>Parties</td>
+                <td>Identifies the persons or organizations involved.</td>
+            </tr>
+
+            <tr>
+                <td>Effective Date</td>
+                <td>Specifies when the agreement begins.</td>
+            </tr>
+
+            <tr>
+                <td>Duration</td>
+                <td>Specifies the agreement period.</td>
+            </tr>
+
+            <tr>
+                <td>Responsibilities</td>
+                <td>Defines duties and obligations.</td>
+            </tr>
+
+            <tr>
+                <td>Payment</td>
+                <td>Describes applicable financial terms.</td>
+            </tr>
+
+            <tr>
+                <td>Termination</td>
+                <td>Describes how the agreement may end.</td>
+            </tr>
+
+        </table>
+
+
+        <h3>Export Document</h3>
+
+        <div class="export-buttons">
+
+            <form
+                action="/export/pdf"
+                method="post"
+            >
+                <textarea
+                    name="document"
+                    hidden
+                >{{ document }}</textarea>
+
+                <button type="submit">
+                    Download PDF
+                </button>
+            </form>
+
+
+            <form
+                action="/export/docx"
+                method="post"
+            >
+                <textarea
+                    name="document"
+                    hidden
+                >{{ document }}</textarea>
+
+                <button type="submit">
+                    Download DOCX
+                </button>
+            </form>
+
+
+            <form
+                action="/export/txt"
+                method="post"
+            >
+                <textarea
+                    name="document"
+                    hidden
+                >{{ document }}</textarea>
+
+                <button type="submit">
+                    Download TXT
+                </button>
+            </form>
+
+        </div>
+
+    {% endif %}
+
+
+    <br>
+
+    <a href="/">
+        ← Create Another Document
+    </a>
+
+</div>
+
+</body>
+
+</html>
