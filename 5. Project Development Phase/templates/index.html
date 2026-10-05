@@ -37,76 +37,153 @@
     </div>
 
     <form
-        action="/generate"
-        method="post"
+    action="/generate"
+    method="post"
+>
+
+    <label for="document_type">
+        Select Document Type
+    </label>
+
+    <select
+        id="document_type"
+        name="document_type"
+        required
+    >
+        <option value="">
+            Select a document
+        </option>
+
+        <option value="Employment Agreement">
+            Employment Agreement
+        </option>
+
+        <option value="Lease Agreement">
+            Lease Agreement
+        </option>
+
+        <option value="Non-Disclosure Agreement">
+            Non-Disclosure Agreement (NDA)
+        </option>
+
+        <option value="Service Agreement">
+            Service Agreement
+        </option>
+
+        <option value="General Agreement">
+            General Agreement
+        </option>
+    </select>
+
+
+    <label for="party_a">
+        Party A / First Party
+    </label>
+
+    <input
+        type="text"
+        id="party_a"
+        name="party_a"
+        required
+        placeholder="Example: ABC Company"
     >
 
-        <label for="document_type">
-            Select Document Type
-        </label>
 
-        <select
-            id="document_type"
-            name="document_type"
-            required
-        >
+    <label for="party_b">
+        Party B / Second Party
+    </label>
 
-            <option value="">
-                Select a document
-            </option>
-
-            <option value="Employment Agreement">
-                Employment Agreement
-            </option>
-
-            <option value="Lease Agreement">
-                Lease Agreement
-            </option>
-
-            <option value="Non-Disclosure Agreement">
-                Non-Disclosure Agreement (NDA)
-            </option>
-
-            <option value="Service Agreement">
-                Service Agreement
-            </option>
-
-            <option value="General Agreement">
-                General Agreement
-            </option>
-
-        </select>
+    <input
+        type="text"
+        id="party_b"
+        name="party_b"
+        required
+        placeholder="Example: XYZ Employee"
+    >
 
 
-        <label for="details">
-            Document Details
-        </label>
+    <label for="effective_date">
+        Effective Date
+    </label>
 
-        <textarea
-            id="details"
-            name="details"
-            rows="14"
-            required
-            placeholder="Enter the details needed for the document.
-
-Example:
-
-First Party: ABC Technologies
-Second Party: Anu
-Effective Date: 10 October 2026
-Duration: 1 year
-Role: Software Developer
-Monthly Payment: 25000
-Responsibilities: Software development and testing
-Additional Terms: Confidentiality must be maintained."
-        ></textarea>
+    <input
+        type="text"
+        id="effective_date"
+        name="effective_date"
+        required
+        placeholder="Example: 5 October 2026"
+    >
 
 
-        <button type="submit">
-            Generate Legal Document
-        </button>
+    <label for="term">
+        Term / Duration
+    </label>
 
-    </form>
+    <input
+        type="text"
+        id="term"
+        name="term"
+        required
+        placeholder="Example: 1 year"
+    >
+
+
+    <label for="jurisdiction">
+        Jurisdiction
+    </label>
+
+    <input
+        type="text"
+        id="jurisdiction"
+        name="jurisdiction"
+        required
+        placeholder="Example: Tamil Nadu, India"
+    >
+
+
+    <label for="purpose">
+        Purpose
+    </label>
+
+    <textarea
+        id="purpose"
+        name="purpose"
+        rows="4"
+        required
+        placeholder="Describe the purpose of the agreement."
+    ></textarea>
+
+
+    <label for="consideration">
+        Consideration / Payment
+    </label>
+
+    <textarea
+        id="consideration"
+        name="consideration"
+        rows="4"
+        required
+        placeholder="Example: Monthly salary of Rs. 25,000"
+    ></textarea>
+
+
+    <label for="special_terms">
+        Special Terms (Optional)
+    </label>
+
+    <textarea
+        id="special_terms"
+        name="special_terms"
+        rows="4"
+        placeholder="Example: Confidentiality must be maintained."
+    ></textarea>
+
+
+    <button type="submit">
+        Generate Legal Document
+    </button>
+
+</form>
 
 </div>
 
