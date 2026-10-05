@@ -32,11 +32,10 @@ app.mount(
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse(
-        "index.html",
-        {
-            "request": request,
-        },
-    )
+    request=request,
+    name="index.html",
+    context={},
+)
 
 
 @app.get("/health")
@@ -79,26 +78,26 @@ async def generate(
     try:
         draft = generate_legal_document(data)
 
-        return templates.TemplateResponse(
-            "result.html",
-            {
-                "request": request,
-                "data": data,
-                "draft": draft,
-                "error": None,
-            },
-        )
+       return templates.TemplateResponse(
+    request=request,
+    name="result.html",
+    context={
+        "data": data,
+        "draft": draft,
+        "error": None,
+    },
+)
 
     except Exception as exc:
-        return templates.TemplateResponse(
-            "result.html",
-            {
-                "request": request,
-                "data": data,
-                "draft": "",
-                "error": str(exc),
-            },
-        )
+       return templates.TemplateResponse(
+    request=request,
+    name="result.html",
+    context={
+        "data": data,
+        "draft": "",
+        "error": str(exc),
+    },
+)
 
 
 @app.post("/api/generate")
