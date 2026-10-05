@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>LegalEase - AI Legal Document Generator</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>LegalEase</h1>
+
+        <p class="subtitle">
+            AI-Powered Legal Document Generator
+        </p>
+    </header>
+
+    <div class="notice">
+        <strong>Important:</strong>
+        LegalEase generates general-purpose legal document
+        drafts. Please have the final document reviewed by
+        a qualified legal professional.
+    </div>
+
+    <form
+        action="/generate"
+        method="post"
+    >
+
+        <label for="document_type">
+            Select Document Type
+        </label>
+
+        <select
+            id="document_type"
+            name="document_type"
+            required
+        >
+
+            <option value="">
+                Select a document
+            </option>
+
+            <option value="Employment Agreement">
+                Employment Agreement
+            </option>
+
+            <option value="Lease Agreement">
+                Lease Agreement
+            </option>
+
+            <option value="Non-Disclosure Agreement">
+                Non-Disclosure Agreement (NDA)
+            </option>
+
+            <option value="Service Agreement">
+                Service Agreement
+            </option>
+
+            <option value="General Agreement">
+                General Agreement
+            </option>
+
+        </select>
+
+
+        <label for="details">
+            Document Details
+        </label>
+
+        <textarea
+            id="details"
+            name="details"
+            rows="14"
+            required
+            placeholder="Enter the details needed for the document.
+
+Example:
+
+First Party: ABC Technologies
+Second Party: Anu
+Effective Date: 10 October 2026
+Duration: 1 year
+Role: Software Developer
+Monthly Payment: 25000
+Responsibilities: Software development and testing
+Additional Terms: Confidentiality must be maintained."
+        ></textarea>
+
+
+        <button type="submit">
+            Generate Legal Document
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+
+</html>
