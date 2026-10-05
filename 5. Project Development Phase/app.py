@@ -29,13 +29,13 @@ app.mount(
 )
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def home(request: Request):
     return templates.TemplateResponse(
-    request=request,
-    name="index.html",
-    context={},
-)
+        request=request,
+        name="index.html",
+        context={},
+    )
 
 
 @app.get("/health")
