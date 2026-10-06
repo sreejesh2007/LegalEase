@@ -1,108 +1,191 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #f2f4f8;
-    margin: 0;
-    padding: 0;
+* {
+    box-sizing: border-box;
 }
+
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+}
+
 
 .container {
-    width: 90%;
-    max-width: 900px;
-    margin: 40px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    width: 92%;
+    max-width: 1000px;
+    margin: 30px auto;
 }
 
-header {
+
+.header {
     text-align: center;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
 }
 
-h1 {
-    font-size: 42px;
-    margin-bottom: 5px;
+
+.header h1 {
+    margin: 0;
+    font-size: 36px;
 }
 
-.subtitle {
-    font-size: 20px;
-    color: #555;
+
+.header p {
+    margin-top: 8px;
+    color: #666;
 }
+
+
+.form-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+.form-card h2 {
+    margin-top: 0;
+}
+
 
 label {
     display: block;
-    margin-top: 20px;
-    margin-bottom: 8px;
+    margin-top: 16px;
+    margin-bottom: 6px;
     font-weight: bold;
 }
+
 
 input,
 select,
 textarea {
     width: 100%;
-    box-sizing: border-box;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 6px;
+    border-radius: 7px;
     font-size: 15px;
-    margin-bottom: 12px;
+    font-family: inherit;
 }
+
 
 textarea {
     resize: vertical;
-    line-height: 1.6;
 }
 
-button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 12px;
+
+.primary-button,
+.export-button,
+.secondary-button {
+    display: inline-block;
     border: none;
-    border-radius: 6px;
+    border-radius: 7px;
+    padding: 12px 18px;
+    margin-top: 20px;
     cursor: pointer;
-    font-size: 16px;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+
+.primary-button {
+    width: 100%;
     font-weight: bold;
 }
+
+
+.export-button {
+    margin-right: 8px;
+}
+
+
+.secondary-button {
+    background: #eeeeee;
+    color: #222222;
+}
+
+
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
 
 .notice {
-    margin: 20px 0;
+    background: #fff8e1;
+    border-left: 5px solid #f0ad00;
     padding: 15px;
-    background: #fff4d6;
-    border-radius: 8px;
-    line-height: 1.6;
+    border-radius: 7px;
+    margin-bottom: 20px;
+    line-height: 1.5;
 }
 
-.error {
+
+.error-box {
+    background: #fff0f0;
+    border-left: 5px solid #d9534f;
     padding: 20px;
-    background: #ffe0e0;
-    border-radius: 8px;
-    color: #8a0000;
+    border-radius: 7px;
 }
 
-table {
+
+.term-table {
+    overflow-x: auto;
+}
+
+
+.term-table table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
-    margin-bottom: 25px;
 }
 
-th,
-td {
-    border: 1px solid #ccc;
-    padding: 12px;
+
+.term-table th,
+.term-table td {
+    border: 1px solid #dddddd;
+    padding: 10px;
     text-align: left;
+    vertical-align: top;
 }
 
-th {
+
+.term-table th {
     font-weight: bold;
 }
 
-.export-buttons {
-    display: grid;
-    gap: 10px;
+
+.document-editor {
+    min-height: 600px;
+    line-height: 1.6;
+    white-space: pre-wrap;
 }
 
-a {
-    text-decoration: none;
-    font-weight: bold;
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 95%;
+        margin: 15px auto;
+    }
+
+
+    .form-card {
+        padding: 18px;
+    }
+
+
+    .header h1 {
+        font-size: 28px;
+    }
+
+
+    .export-button {
+        width: 100%;
+        margin-right: 0;
+    }
 }
