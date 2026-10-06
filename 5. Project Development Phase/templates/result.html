@@ -21,13 +21,19 @@
 
 </head>
 
+
 <body>
 
 <div class="container">
 
+
+    <!-- HEADER -->
+
     <header class="header">
 
-        <h1>LegalEase</h1>
+        <h1>
+            LegalEase
+        </h1>
 
         <p>
             Generated Legal Document
@@ -36,7 +42,11 @@
     </header>
 
 
+
     {% if error %}
+
+
+    <!-- ERROR -->
 
     <div class="error-box">
 
@@ -57,8 +67,11 @@
 
     </div>
 
+
     {% else %}
 
+
+    <!-- DOCUMENT INFORMATION -->
 
     <div class="form-card">
 
@@ -66,53 +79,91 @@
             Document Information
         </h2>
 
+
         <div class="term-table">
 
             <table>
 
                 <tr>
-                    <th>Document Type</th>
+
+                    <th>
+                        Document Type
+                    </th>
+
                     <td>
                         {{ data.document_type }}
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <th>Party A</th>
+
+                    <th>
+                        Party A
+                    </th>
+
                     <td>
                         {{ data.party_a }}
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <th>Party B</th>
+
+                    <th>
+                        Party B
+                    </th>
+
                     <td>
                         {{ data.party_b }}
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <th>Effective Date</th>
+
+                    <th>
+                        Effective Date
+                    </th>
+
                     <td>
                         {{ data.effective_date }}
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <th>Term</th>
+
+                    <th>
+                        Term
+                    </th>
+
                     <td>
                         {{ data.term }}
                     </td>
+
                 </tr>
 
+
                 <tr>
-                    <th>Jurisdiction</th>
+
+                    <th>
+                        Jurisdiction
+                    </th>
+
                     <td>
                         {{ data.jurisdiction }}
                     </td>
+
                 </tr>
 
+
                 <tr>
+
                     <th>
                         Purpose / Role / Property
                     </th>
@@ -120,9 +171,12 @@
                     <td>
                         {{ data.purpose }}
                     </td>
+
                 </tr>
 
+
                 <tr>
+
                     <th>
                         Payment / Consideration
                     </th>
@@ -130,9 +184,12 @@
                     <td>
                         {{ data.consideration }}
                     </td>
+
                 </tr>
 
+
                 <tr>
+
                     <th>
                         Special Terms
                     </th>
@@ -140,6 +197,7 @@
                     <td>
                         {{ data.special_terms or "Not specified" }}
                     </td>
+
                 </tr>
 
             </table>
@@ -149,11 +207,15 @@
     </div>
 
 
+
+    <!-- GENERATED DOCUMENT -->
+
     <div class="form-card">
 
         <h2>
             Editable Document Preview
         </h2>
+
 
         <p>
             You can edit the generated document
@@ -166,11 +228,15 @@
             method="post"
         >
 
+
+            <!-- HIDDEN FORM DATA -->
+
             <input
                 type="hidden"
                 name="document_type"
                 value="{{ data.document_type }}"
             >
+
 
             <input
                 type="hidden"
@@ -178,11 +244,13 @@
                 value="{{ data.party_a }}"
             >
 
+
             <input
                 type="hidden"
                 name="party_b"
                 value="{{ data.party_b }}"
             >
+
 
             <input
                 type="hidden"
@@ -190,11 +258,13 @@
                 value="{{ data.effective_date }}"
             >
 
+
             <input
                 type="hidden"
                 name="term"
                 value="{{ data.term }}"
             >
+
 
             <input
                 type="hidden"
@@ -202,11 +272,13 @@
                 value="{{ data.jurisdiction }}"
             >
 
+
             <input
                 type="hidden"
                 name="purpose"
                 value="{{ data.purpose }}"
             >
+
 
             <input
                 type="hidden"
@@ -214,11 +286,13 @@
                 value="{{ data.consideration }}"
             >
 
+
             <input
                 type="hidden"
                 name="special_terms"
                 value="{{ data.special_terms }}"
             >
+
 
             <input
                 type="hidden"
@@ -226,12 +300,16 @@
                 value="{{ data.logo_text }}"
             >
 
+
             <input
                 type="hidden"
                 name="font"
                 value="{{ data.font }}"
             >
 
+
+
+            <!-- EDITABLE DOCUMENT -->
 
             <textarea
                 name="draft"
@@ -241,7 +319,11 @@
             >{{ draft }}</textarea>
 
 
+
+            <!-- EXPORT BUTTONS -->
+
             <div class="button-group">
+
 
                 <button
                     type="submit"
@@ -269,10 +351,15 @@
                     Download PDF
                 </button>
 
+
             </div>
+
 
         </form>
 
+
+
+        <!-- CREATE ANOTHER -->
 
         <a
             href="/"
@@ -283,6 +370,9 @@
 
     </div>
 
+
+
+    <!-- LEGAL NOTICE -->
 
     <div class="notice">
 
@@ -300,7 +390,9 @@
 
     {% endif %}
 
+
 </div>
+
 
 </body>
 
