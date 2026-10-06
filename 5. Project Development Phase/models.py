@@ -8,7 +8,6 @@ DocumentType = Literal[
     "Employment Agreement",
     "Lease Agreement",
     "Service Agreement",
-    "General Agreement",
 ]
 
 FontType = Literal[
