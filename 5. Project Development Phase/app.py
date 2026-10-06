@@ -11,21 +11,11 @@ from document_generator import (
     create_pdf_file,
 )
 
-
-# --------------------------------------------------
-# Create FastAPI application
-# --------------------------------------------------
-
 app = FastAPI(
     title="LegalEase",
     description="AI-Powered Legal Document Generator",
     version="1.0.0",
 )
-
-
-# --------------------------------------------------
-# Templates and static files
-# --------------------------------------------------
 
 templates = Jinja2Templates(
     directory="templates"
@@ -39,21 +29,22 @@ app.mount(
 
 
 # --------------------------------------------------
-# Home page
+# HOME PAGE
 # --------------------------------------------------
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse(
-        "index.html",
-        {
+        request=request,
+        name="index.html",
+        context={
             "request": request,
         },
     )
 
 
 # --------------------------------------------------
-# Health check
+# HEALTH CHECK
 # --------------------------------------------------
 
 @app.get("/health")
@@ -65,7 +56,7 @@ async def health():
 
 
 # --------------------------------------------------
-# Generate legal document from web form
+# GENERATE LEGAL DOCUMENT
 # --------------------------------------------------
 
 @app.post("/generate", response_class=HTMLResponse)
@@ -83,6 +74,7 @@ async def generate(
     logo_text: str = Form("LegalEase"),
     font: str = Form("Arial"),
 ):
+
     data = LegalDocumentRequest(
         document_type=document_type,
         party_a=party_a,
@@ -98,11 +90,13 @@ async def generate(
     )
 
     try:
+
         draft = generate_legal_document(data)
 
         return templates.TemplateResponse(
-            "result.html",
-            {
+            request=request,
+            name="result.html",
+            context={
                 "request": request,
                 "data": data,
                 "draft": draft,
@@ -111,9 +105,11 @@ async def generate(
         )
 
     except Exception as exc:
+
         return templates.TemplateResponse(
-            "result.html",
-            {
+            request=request,
+            name="result.html",
+            context={
                 "request": request,
                 "data": data,
                 "draft": "",
@@ -123,11 +119,12 @@ async def generate(
 
 
 # --------------------------------------------------
-# Generate document through API
+# API GENERATE
 # --------------------------------------------------
 
 @app.post("/api/generate")
 async def api_generate(data: LegalDocumentRequest):
+
     draft = generate_legal_document(data)
 
     return {
@@ -138,7 +135,7 @@ async def api_generate(data: LegalDocumentRequest):
 
 
 # --------------------------------------------------
-# Export TXT
+# EXPORT TXT
 # --------------------------------------------------
 
 @app.post("/api/export/txt")
@@ -156,6 +153,7 @@ async def export_txt(
     font: str = Form("Arial"),
     draft: str = Form(...),
 ):
+
     data = LegalDocumentRequest(
         document_type=document_type,
         party_a=party_a,
@@ -170,7 +168,10 @@ async def export_txt(
         font=font,
     )
 
-    file = create_txt_file(data, draft)
+    file = create_txt_file(
+        data,
+        draft
+    )
 
     return StreamingResponse(
         file,
@@ -183,7 +184,7 @@ async def export_txt(
 
 
 # --------------------------------------------------
-# Export DOCX
+# EXPORT DOCX
 # --------------------------------------------------
 
 @app.post("/api/export/docx")
@@ -201,6 +202,7 @@ async def export_docx(
     font: str = Form("Arial"),
     draft: str = Form(...),
 ):
+
     data = LegalDocumentRequest(
         document_type=document_type,
         party_a=party_a,
@@ -215,7 +217,10 @@ async def export_docx(
         font=font,
     )
 
-    file = create_docx_file(data, draft)
+    file = create_docx_file(
+        data,
+        draft
+    )
 
     return StreamingResponse(
         file,
@@ -231,7 +236,7 @@ async def export_docx(
 
 
 # --------------------------------------------------
-# Export PDF
+# EXPORT PDF
 # --------------------------------------------------
 
 @app.post("/api/export/pdf")
@@ -249,6 +254,7 @@ async def export_pdf(
     font: str = Form("Arial"),
     draft: str = Form(...),
 ):
+
     data = LegalDocumentRequest(
         document_type=document_type,
         party_a=party_a,
@@ -263,7 +269,10 @@ async def export_pdf(
         font=font,
     )
 
-    file = create_pdf_file(data, draft)
+    file = create_pdf_file(
+        data,
+        draft
+    )
 
     return StreamingResponse(
         file,
