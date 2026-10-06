@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
 
     <meta
@@ -9,181 +10,243 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>LegalEase - AI Legal Document Generator</title>
+    <title>
+        LegalEase - AI Legal Document Generator
+    </title>
 
     <link
         rel="stylesheet"
-        href="/static/style.css"
+        href="{{ url_for('static', path='style.css') }}"
     >
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <header>
+    <header class="header">
+
         <h1>LegalEase</h1>
 
-        <p class="subtitle">
+        <p>
             AI-Powered Legal Document Generator
         </p>
+
     </header>
 
+
     <div class="notice">
+
         <strong>Important:</strong>
-        LegalEase generates general-purpose legal document
-        drafts. Please have the final document reviewed by
-        a qualified legal professional.
+
+        LegalEase generates AI-assisted legal
+        document drafts. The generated content
+        should be reviewed by a qualified legal
+        professional before actual use.
+
     </div>
 
+
     <form
-    action="/generate"
-    method="post"
->
-
-    <label for="document_type">
-        Select Document Type
-    </label>
-
-    <select
-        id="document_type"
-        name="document_type"
-        required
-    >
-        <option value="">
-            Select a document
-        </option>
-
-        <option value="Employment Agreement">
-            Employment Agreement
-        </option>
-
-        <option value="Lease Agreement">
-            Lease Agreement
-        </option>
-
-        <option value="Non-Disclosure Agreement">
-            Non-Disclosure Agreement (NDA)
-        </option>
-
-        <option value="Service Agreement">
-            Service Agreement
-        </option>
-
-        <option value="General Agreement">
-            General Agreement
-        </option>
-    </select>
-
-
-    <label for="party_a">
-        Party A / First Party
-    </label>
-
-    <input
-        type="text"
-        id="party_a"
-        name="party_a"
-        required
-        placeholder="Example: ABC Company"
+        action="/generate"
+        method="post"
+        class="form-card"
     >
 
-
-    <label for="party_b">
-        Party B / Second Party
-    </label>
-
-    <input
-        type="text"
-        id="party_b"
-        name="party_b"
-        required
-        placeholder="Example: XYZ Employee"
-    >
+        <h2>
+            Document Information
+        </h2>
 
 
-    <label for="effective_date">
-        Effective Date
-    </label>
+        <label for="document_type">
+            Document Type
+        </label>
 
-    <input
-        type="text"
-        id="effective_date"
-        name="effective_date"
-        required
-        placeholder="Example: 5 October 2026"
-    >
+        <select
+            id="document_type"
+            name="document_type"
+            required
+        >
 
+            <option value="">
+                Select document type
+            </option>
 
-    <label for="term">
-        Term / Duration
-    </label>
+            <option value="Non-Disclosure Agreement (NDA)">
+                Non-Disclosure Agreement (NDA)
+            </option>
 
-    <input
-        type="text"
-        id="term"
-        name="term"
-        required
-        placeholder="Example: 1 year"
-    >
+            <option value="Employment Agreement">
+                Employment Agreement
+            </option>
 
+            <option value="Lease Agreement">
+                Lease Agreement
+            </option>
 
-    <label for="jurisdiction">
-        Jurisdiction
-    </label>
+            <option value="Service Agreement">
+                Service Agreement
+            </option>
 
-    <input
-        type="text"
-        id="jurisdiction"
-        name="jurisdiction"
-        required
-        placeholder="Example: Tamil Nadu, India"
-    >
+        </select>
 
 
-    <label for="purpose">
-        Purpose
-    </label>
+        <label for="party_a">
+            Party A
+        </label>
 
-    <textarea
-        id="purpose"
-        name="purpose"
-        rows="4"
-        required
-        placeholder="Describe the purpose of the agreement."
-    ></textarea>
-
-
-    <label for="consideration">
-        Consideration / Payment
-    </label>
-
-    <textarea
-        id="consideration"
-        name="consideration"
-        rows="4"
-        required
-        placeholder="Example: Monthly salary of Rs. 25,000"
-    ></textarea>
+        <input
+            type="text"
+            id="party_a"
+            name="party_a"
+            placeholder="Enter first party name"
+            required
+        >
 
 
-    <label for="special_terms">
-        Special Terms (Optional)
-    </label>
+        <label for="party_b">
+            Party B
+        </label>
 
-    <textarea
-        id="special_terms"
-        name="special_terms"
-        rows="4"
-        placeholder="Example: Confidentiality must be maintained."
-    ></textarea>
+        <input
+            type="text"
+            id="party_b"
+            name="party_b"
+            placeholder="Enter second party name"
+            required
+        >
 
 
-    <button type="submit">
-        Generate Legal Document
-    </button>
+        <label for="effective_date">
+            Effective Date
+        </label>
 
-</form>
+        <input
+            type="date"
+            id="effective_date"
+            name="effective_date"
+            required
+        >
+
+
+        <label for="term">
+            Term
+        </label>
+
+        <input
+            type="text"
+            id="term"
+            name="term"
+            placeholder="Example: 2 years"
+            required
+        >
+
+
+        <label for="jurisdiction">
+            Jurisdiction
+        </label>
+
+        <input
+            type="text"
+            id="jurisdiction"
+            name="jurisdiction"
+            placeholder="Example: Tamil Nadu, India"
+            required
+        >
+
+
+        <label for="purpose">
+            Purpose / Role / Property Description
+        </label>
+
+        <textarea
+            id="purpose"
+            name="purpose"
+            rows="4"
+            placeholder="Describe the purpose, role or property"
+            required
+        ></textarea>
+
+
+        <label for="consideration">
+            Payment / Consideration
+        </label>
+
+        <textarea
+            id="consideration"
+            name="consideration"
+            rows="3"
+            placeholder="Enter payment or consideration details"
+            required
+        ></textarea>
+
+
+        <label for="special_terms">
+            Special Terms
+        </label>
+
+        <textarea
+            id="special_terms"
+            name="special_terms"
+            rows="4"
+            placeholder="Enter any additional terms"
+        ></textarea>
+
+
+        <h2>
+            Branding
+        </h2>
+
+
+        <label for="logo_text">
+            Logo / Brand Text
+        </label>
+
+        <input
+            type="text"
+            id="logo_text"
+            name="logo_text"
+            value="LegalEase"
+        >
+
+
+        <label for="font">
+            Font
+        </label>
+
+        <select
+            id="font"
+            name="font"
+        >
+
+            <option value="Arial">
+                Arial
+            </option>
+
+            <option value="Georgia">
+                Georgia
+            </option>
+
+            <option value="Times New Roman">
+                Times New Roman
+            </option>
+
+            <option value="Courier New">
+                Courier New
+            </option>
+
+        </select>
+
+
+        <button
+            type="submit"
+            class="primary-button"
+        >
+            Generate Legal Document
+        </button>
+
+    </form>
 
 </div>
 
