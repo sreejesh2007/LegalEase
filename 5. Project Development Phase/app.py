@@ -12,11 +12,20 @@ from document_generator import (
 )
 
 
+# --------------------------------------------------
+# Create FastAPI application
+# --------------------------------------------------
+
 app = FastAPI(
     title="LegalEase",
     description="AI-Powered Legal Document Generator",
     version="1.0.0",
 )
+
+
+# --------------------------------------------------
+# Templates and static files
+# --------------------------------------------------
 
 templates = Jinja2Templates(
     directory="templates"
@@ -29,14 +38,23 @@ app.mount(
 )
 
 
-@app.get("/")
+# --------------------------------------------------
+# Home page
+# --------------------------------------------------
+
+@app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
     return templates.TemplateResponse(
-        request=request,
-        name="index.html",
-        context={},
+        "index.html",
+        {
+            "request": request,
+        },
     )
 
+
+# --------------------------------------------------
+# Health check
+# --------------------------------------------------
 
 @app.get("/health")
 async def health():
@@ -45,6 +63,10 @@ async def health():
         "application": "LegalEase",
     }
 
+
+# --------------------------------------------------
+# Generate legal document from web form
+# --------------------------------------------------
 
 @app.post("/generate", response_class=HTMLResponse)
 async def generate(
@@ -78,27 +100,31 @@ async def generate(
     try:
         draft = generate_legal_document(data)
 
-       return templates.TemplateResponse(
-    request=request,
-    name="result.html",
-    context={
-        "data": data,
-        "draft": draft,
-        "error": None,
-    },
-)
+        return templates.TemplateResponse(
+            "result.html",
+            {
+                "request": request,
+                "data": data,
+                "draft": draft,
+                "error": None,
+            },
+        )
 
     except Exception as exc:
-       return templates.TemplateResponse(
-    request=request,
-    name="result.html",
-    context={
-        "data": data,
-        "draft": "",
-        "error": str(exc),
-    },
-)
+        return templates.TemplateResponse(
+            "result.html",
+            {
+                "request": request,
+                "data": data,
+                "draft": "",
+                "error": str(exc),
+            },
+        )
 
+
+# --------------------------------------------------
+# Generate document through API
+# --------------------------------------------------
 
 @app.post("/api/generate")
 async def api_generate(data: LegalDocumentRequest):
@@ -110,6 +136,10 @@ async def api_generate(data: LegalDocumentRequest):
         "document": draft,
     }
 
+
+# --------------------------------------------------
+# Export TXT
+# --------------------------------------------------
 
 @app.post("/api/export/txt")
 async def export_txt(
@@ -151,6 +181,10 @@ async def export_txt(
         },
     )
 
+
+# --------------------------------------------------
+# Export DOCX
+# --------------------------------------------------
 
 @app.post("/api/export/docx")
 async def export_docx(
@@ -195,6 +229,10 @@ async def export_docx(
         },
     )
 
+
+# --------------------------------------------------
+# Export PDF
+# --------------------------------------------------
 
 @app.post("/api/export/pdf")
 async def export_pdf(
