@@ -37,7 +37,7 @@ LegalEase aims to simplify the document drafting process by providing:
 3. Editable previews
 4. Structured terms and sections
 5. Multiple export formats
-6. Simple web-based access
+6. Simple web-based 
 
 ---
 
